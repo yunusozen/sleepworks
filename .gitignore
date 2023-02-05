@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# sleep works files and directories 
+*.edf
+*.pickle
