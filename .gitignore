@@ -131,3 +131,8 @@ dmypy.json
 # sleep works files and directories 
 *.edf
 *.pickle
+
+
+# model files
+
+model*/
