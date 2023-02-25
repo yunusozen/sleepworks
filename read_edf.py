@@ -34,7 +34,7 @@ def read_egg_from_edf(edf_file_path='data.edf', ch = 'Fpz'):
 
 
 
-def resample_eeg(eeg_data, old_fs=512, new_fs=100):
+def resample_eeg_data(eeg_data, old_fs=512, new_fs=100):
 
     resampling_factor = new_fs / old_fs
     
@@ -48,22 +48,19 @@ def resample_eeg(eeg_data, old_fs=512, new_fs=100):
 
 
 
-def resample_eeg_data_mne(eeg_data):
-    # Create an info object with channel information and sampling rate
-    ch_names = ["EEG"]  # Replace with your channel names if necessary
+def resample_eeg_data_mne(eeg_data, old_fs=512, new_fs=100):
+
+    ch_names = ["EEG"] 
     ch_types = ["eeg"]
-    sfreq = 512  # Replace with your original sampling rate
-    info = mne.create_info(ch_names=ch_names, ch_types=ch_types, sfreq=sfreq)
+
+    info = mne.create_info(ch_names=ch_names, ch_types=ch_types, sfreq=old_fs)
     
     # Create a raw object from the EEG data and info object
     raw = mne.io.RawArray(np.array([eeg_data]), info)
     
-    # Resample the EEG data to 100 Hz using mne.resample() function
-    target_sfreq = 100  # Replace with your target sampling rate
-    resampled_raw = raw.resample(sfreq=target_sfreq)
+    resampled_raw = raw.resample(sfreq=new_fs)
     
     # Extract the resampled EEG data as a numpy array
     resampled_eeg_data = resampled_raw.get_data()[0]
     
-    # Return the resampled EEG data
     return resampled_eeg_data.tolist()
