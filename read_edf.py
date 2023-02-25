@@ -14,5 +14,5 @@ def read_edf():
 
     options=['Sleep stage W','Sleep stage N1','Sleep stage N2','Sleep stage N3', 'Sleep stage R']
     df=annots[annots['description'].isin(options)]
-    df2=df['description'].tolist()
-    return df2
+    df=df['description'].tolist()
+    return df
