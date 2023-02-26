@@ -40,23 +40,22 @@ def predict_eeg_data(eeg_data, model_path):
 
 if __name__ == "__main__":
 
-    edf_file_path = "data.edf"
-
-    ch_name = "Fpz"
+    edf_file_path = "./12649_7864.edf"
+    ch_name = "EEG F3-M2"
     resample = True
     model_path = "./model_c12022-02-28_1738-21"      
     
     print_edf_info(edf_file_path=edf_file_path)
-
     
     original_eeg = read_egg_from_edf(edf_file_path=edf_file_path, ch=ch_name)
     print("orig", len(original_eeg))
+
     if resample:
-        eeg_data = resample_eeg_data_mne(original_eeg)
+        eeg_data = resample_eeg_data_mne(eeg_data=original_eeg, old_fs=256, new_fs=100)
     else:
         eeg_data = original_eeg
-
     print("eeg",len(eeg_data))
+    
     eeg_data =  zscore(eeg_data)
     print("zscore", len(eeg_data))
   
@@ -78,17 +77,17 @@ if __name__ == "__main__":
     plt.show()
 
 
-    hypnograms = read_sleep_stages(edf_file_path)
+    # hypnograms = read_sleep_stages(edf_file_path)
 
-    hypnograms = [mapping[i] for i in hypnograms]
+    # hypnograms = [mapping[i] for i in hypnograms]
 
-    print(len(hypnograms))
-    print(len(predicted_labels))
+    # print(len(hypnograms))
+    # print(len(predicted_labels))
 
-    cm = confusion_matrix(hypnograms, predicted_labels)
+    # cm = confusion_matrix(hypnograms, predicted_labels)
 
-    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-    disp.plot()
+    # disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    # disp.plot()
 
-    plt.show()
+    # plt.show()
 
