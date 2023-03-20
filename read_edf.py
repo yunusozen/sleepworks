@@ -32,7 +32,7 @@ def read_sleep_stages_tsv(file_path, read_unknowns=False):
     options=['Sleep stage W','Sleep stage N1','Sleep stage N2','Sleep stage N3', 'Sleep stage R']
 
     if read_unknowns==True:
-        options=['Sleep stage W','Sleep stage N1','Sleep stage N2','Sleep stage N3', 'Sleep stage R',
+        options=['Sleep stage W','Sleep stage N1','Sleep stage N2','Sleep stage N3', 'Sleep stage R', 'Sleep stage ?']
                  
     df=annots[annots['description'].isin(options)]
 
@@ -42,9 +42,9 @@ def read_egg_from_edf(edf_file_path='data.edf', ch = 'Fpz'):
 
     raw = mne.io.read_raw_edf(edf_file_path, preload=True)
     
-    fpz_data, times = raw.get_data(picks=ch, return_times=True)
+    ch_data, times = raw.get_data(picks=ch, return_times=True)
 
-    return fpz_data[0].tolist()
+    return ch_data[0].tolist()
 
 
 
