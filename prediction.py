@@ -40,10 +40,10 @@ def predict_eeg_data(eeg_data, model_path):
 
 if __name__ == "__main__":
 
-    edf_file_path = "./12649_7864.edf"
-    ch_name = "EEG F3-M2"
+    edf_file_path = "./13045_17473.edf"
+    ch_name = "EEG CZ-O1"
     resample = True
-    model_path = "./model_c12022-02-28_1738-21"      
+    model_path = "./model12"      
     
     print_edf_info(edf_file_path=edf_file_path)
     
